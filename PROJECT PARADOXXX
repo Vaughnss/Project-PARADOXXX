@@ -1,48 +1,75 @@
-// next.config.js
-module.exports = {
-  reactStrictMode: true,
-};
-
-// pages/index.js
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Paradox - Level Up Your Life</title>
-        <meta name="description" content="A gamified self-improvement app to help you level up in real life." />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+  const [level, setLevel] = useState(7);
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to Paradox</h1>
-        <p className={styles.description}>The RPG that levels up your real life.</p>
-      </main>
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLevel((prev) => (prev < 100 ? prev + 1 : 7));
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="bg-black text-white min-h-screen flex flex-col items-center text-center px-6">
+      <nav className="w-full flex justify-between py-4 px-8 border-b border-gray-700">
+        <h1 className="text-xl font-bold text-blue-500">Paradox</h1>
+        <div>
+          <Link href="#features" className="mx-4 text-gray-300 hover:text-white">Features</Link>
+          <Link href="#about" className="mx-4 text-gray-300 hover:text-white">About</Link>
+          <Link href="#contact" className="mx-4 text-gray-300 hover:text-white">Contact</Link>
+        </div>
+      </nav>
+
+      <motion.h1
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="text-5xl font-bold text-blue-500 mt-20"
+      >
+        Level Up Your Life
+      </motion.h1>
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+        className="text-lg text-gray-300 mt-4"
+      >
+        "You are Level {level}... Here’s how to reach Level {level + 3}"  
+      </motion.p>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.5 }}
+        className="mt-8"
+      >
+        <Button className="px-6 py-3 text-lg font-semibold bg-blue-600 hover:bg-blue-700">
+          Join the Beta - Only 1,000 Spots Left!
+        </Button>
+      </motion.div>
+
+      <section id="features" className="mt-16 w-full px-6">
+        <h2 className="text-3xl font-bold text-blue-400">Features</h2>
+        <ul className="text-gray-300 mt-4">
+          <li>✅ Real-life RPG leveling system</li>
+          <li>✅ AI-generated personalized goals</li>
+          <li>✅ Social leaderboards & streaks</li>
+          <li>✅ Unlockable achievements & rewards</li>
+        </ul>
+      </section>
+
+      <section id="about" className="mt-16 w-full px-6">
+        <h2 className="text-3xl font-bold text-blue-400">About</h2>
+        <p className="text-gray-300 mt-4">Paradox is an app designed to gamify self-improvement, making personal growth as engaging as a video game.</p>
+      </section>
+
+      <section id="contact" className="mt-16 w-full px-6">
+        <h2 className="text-3xl font-bold text-blue-400">Contact</h2>
+        <p className="text-gray-300 mt-4">Want to collaborate or learn more? Reach out to us at <span className="text-blue-500">contact@paradox.com</span></p>
+      </section>
     </div>
   );
 }
-
-// styles/globals.css
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #111;
-  color: #fff;
-  text-align: center;
-}
-
-// public/favicon.ico (Upload an image manually to this folder)
-
-// README.md
-# Paradox - Level Up Your Life
-
-This is a Next.js project for a self-improvement RPG-style app.
-
-## Setup
-1. Install dependencies: `npm install`
-2. Start the development server: `npm run dev`
-
-## Deployment
-- Deploy on [Vercel](https://vercel.com) by linking this repository.
