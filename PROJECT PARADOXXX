@@ -1,0 +1,48 @@
+// next.config.js
+module.exports = {
+  reactStrictMode: true,
+};
+
+// pages/index.js
+import Head from 'next/head';
+import styles from '../styles/Home.module.css';
+
+export default function Home() {
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Paradox - Level Up Your Life</title>
+        <meta name="description" content="A gamified self-improvement app to help you level up in real life." />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main className={styles.main}>
+        <h1 className={styles.title}>Welcome to Paradox</h1>
+        <p className={styles.description}>The RPG that levels up your real life.</p>
+      </main>
+    </div>
+  );
+}
+
+// styles/globals.css
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: #fff;
+  text-align: center;
+}
+
+// public/favicon.ico (Upload an image manually to this folder)
+
+// README.md
+# Paradox - Level Up Your Life
+
+This is a Next.js project for a self-improvement RPG-style app.
+
+## Setup
+1. Install dependencies: `npm install`
+2. Start the development server: `npm run dev`
+
+## Deployment
+- Deploy on [Vercel](https://vercel.com) by linking this repository.
